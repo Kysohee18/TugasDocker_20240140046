@@ -1,40 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home - My Website</title>
-    <link rel="stylesheet" th:href="@{/static.css}">
+    <title>Dashboard - 20240140046</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<header>
-    <h1>MY Website - 20240140046</h1> <p>Selamat datang di aplikasi!</p>
-</header>
+<body class="bg-slate-50 min-h-screen">
+<nav class="bg-white shadow-sm border-b border-slate-200 px-8 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-slate-800">MY Website <span class="text-blue-600">20240140046</span></h1>
+    <a th:href="@{/logout}" class="text-sm font-medium text-red-500 hover:text-red-700 transition">Logout</a>
+</nav>
 
-<div class="actions">
-    <a th:href="@{/form}" class="btn">Input Data Mahasiswa</a>
-    <a th:href="@{/logout}" class="btn-logout">Logout</a>
-</div>
+<main class="max-w-6xl mx-auto mt-10 p-6">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Data Mahasiswa</h2>
+                <p class="text-slate-500 text-sm">Selamat datang di aplikasi manajemen data.</p>
+            </div>
+            <a th:href="@{/form}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-md shadow-blue-100">
+                + Input Data Baru
+            </a>
+        </div>
 
-<h3>Data Mahasiswa</h3>
-<table border="1">
-    <thead>
-    <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>NIM</th>
-        <th>Jenis Kelamin</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="mhs, iterStat : ${dataMahasiswa}">
-        <th th:text="${iterStat.count}">1</th>
-        <td th:text="${mhs.nama}">Nama</td>
-        <td th:text="${mhs.nim}">NIM</td>
-        <td th:text="${mhs.jenisKelamin}">Jenis Kelamin</td>
-    </tr>
-    <tr th:if="${#lists.isEmpty(dataMahasiswa)}">
-        <td colspan="4">Belum ada data</td>
-    </tr>
-    </tbody>
-</table>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                <tr class="bg-slate-100 text-slate-600 text-sm uppercase tracking-wider">
+                    <th class="px-6 py-4 font-semibold">No</th>
+                    <th class="px-6 py-4 font-semibold">Nama Mahasiswa</th>
+                    <th class="px-6 py-4 font-semibold">NIM</th>
+                    <th class="px-6 py-4 font-semibold">Jenis Kelamin</th>
+                </tr>
+                </thead>
+                <tbody class="text-slate-700 divide-y divide-slate-100">
+                <tr th:each="mhs, iterStat : ${dataMahasiswa}" class="hover:bg-blue-50/30 transition">
+                    <td class="px-6 py-4 font-medium" th:text="${iterStat.count}">1</td>
+                    <td class="px-6 py-4" th:text="${mhs.nama}">Ardian Mulya</td>
+                    <td class="px-6 py-4" th:text="${mhs.nim}">20210140019</td>
+                    <td class="px-6 py-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold"
+                                      th:classappend="${mhs.jenisKelamin == 'Laki-laki' ? 'bg-blue-100 text-blue-700' : 'bg-pink-100 text-pink-700'}"
+                                      th:text="${mhs.jenisKelamin}">Laki-laki</span>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(dataMahasiswa)}">
+                    <td colspan="4" class="px-6 py-10 text-center text-slate-400 italic">Belum ada data mahasiswa yang terdaftar.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 </body>
 </html>
