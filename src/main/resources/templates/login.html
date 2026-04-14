@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login Page - Tugas Deployment</title>
+    <link rel="stylesheet" th:href="@{/static.css}">
 </head>
 <body>
-
+<div class="container">
+    <h2>Login Page</h2>
+    <form th:action="@{/login}" method="post">
+        <div th:if="${error}" style="color: red;" th:text="${error}"></div>
+        <label>Username</label>
+        <input type="text" name="username" required>
+        <label>Password</label>
+        <input type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
 </body>
 </html>
