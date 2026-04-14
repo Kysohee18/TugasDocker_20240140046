@@ -1,4 +1,3 @@
-# Content for the README.md file based on the previously discussed structure
 readme_content = """# Tugas Deployment Spring Boot & Docker
 **Nama:** Shahky Yandhana Putra  
 **NIM:** 20240140046  
